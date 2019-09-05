@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Switch, Route, withRouter, Redirect } from 'react-router';
 import UserSearch from './components/user-search/UserSearch';
+import Home from './layout/Home/Home';
 
 class App extends Component {
 	render() {
