@@ -3,8 +3,11 @@ import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import { connectRouter, routerMiddleware } from "connected-react-router";
 import thunk from "redux-thunk";
 
+import userSearchReducer from './reducers/userSearchReducer';
+
 export default function configureStore(history, initialState) {
   const reducers = {
+    userSearchReducer,
   };
 
   const middleware = [thunk, routerMiddleware(history)];

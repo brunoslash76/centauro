@@ -1,0 +1,3 @@
+export {
+    getUser
+} from './userSearchActions';
