@@ -1,7 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
+
+import { Provider } from 'react-redux';
+import { CreateBrowserHistory } from 'history';
+import { ConnectedRouter } from 'connected-react-router';
+
+import configureStore from './store/configStore';
+import configureAxios from './utils/configureAxios';
+
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(<App />, document.getElementById('root'));
