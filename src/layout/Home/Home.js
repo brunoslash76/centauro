@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import UserSearch from '../../components/user-search/UserSearch';
+import UserSearch from '../../components/userSearch/UserSearch';
 
 export default class Home extends Component {
     constructor(props) {

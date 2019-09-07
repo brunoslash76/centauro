@@ -4,10 +4,12 @@ import { connectRouter, routerMiddleware } from "connected-react-router";
 import thunk from "redux-thunk";
 
 import userSearchReducer from './reducers/userSearchReducer';
+import loadingReducer from './reducers/loadingReducer';
 
 export default function configureStore(history, initialState) {
   const reducers = {
     userSearchReducer,
+    loadingReducer,
   };
 
   const middleware = [thunk, routerMiddleware(history)];
@@ -27,11 +29,7 @@ export default function configureStore(history, initialState) {
     router: connectRouter(history)
   });
 
-  //Reset redux state only if logoff was successfully
   const combineReducersApp = (state, action) => {
-    if (action.type === "LOG_OUT_SUCCESS") {
-      state = undefined;
-    }
     return rootReducer(state, action);
   };
 
