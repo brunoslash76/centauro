@@ -1,19 +1,16 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import * as actions from '../../store/actions/actionsIndex'
 
 class UserDetails extends Component {
-	constructor(props) {
-		super(props);
-	}
 
 	componentDidMount() {
 		console.log(this.props);
 	}
 
 	resetUser() {
-
+		this.props.resetUser();
 	}
 
 	render() {
@@ -30,7 +27,7 @@ class UserDetails extends Component {
 			);
 		}
 		const { user } = this.props;
-		console.log(user)
+		console.log(user);
 		return (
 			<section>
 				<div className='user-avatar'>
