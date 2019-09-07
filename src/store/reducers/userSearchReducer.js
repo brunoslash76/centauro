@@ -1,9 +1,6 @@
 import {
-	// GET_USER_REQUEST,
 	GET_USER_SUCCESS,
 	GET_USER_FAILURE,
-	GET_USER_REPOS_FAILURE,
-	GET_USER_REPOS_SUCCESS,
 	RESET_USER
 } from '../actions/actionTypes';
 
@@ -27,19 +24,7 @@ const setUserError = (state, action) => {
 		userError: action.error
 	};
 };
-const setReposError = (state, action) => {
-	return {
-		...state,
-		reposError: action.error
-	};
-};
 
-const setRepos = (state, action) => {
-	return {
-		...state,
-		repos: action.repos
-	};
-};
 
 const resetUser = (state, action) => {
 	return {

@@ -3,13 +3,11 @@ import {
 	GET_USER_REQUEST,
 	GET_USER_SUCCESS,
 	GET_USER_FAILURE,
-	GET_USER_REPOS_REQUEST,
-	GET_USER_REPOS_SUCCESS,
-	GET_USER_REPOS_FAILURE,
+	
 	RESET_USER
 } from './actionTypes';
 
-import { _GIT_URL } from '../../utils/baseURL';
+import { _GIT_URL as _GIT_USER_URL } from '../../utils/baseURL';
 
 export const getUser = username => {
 	return async dispatch => {
@@ -18,7 +16,7 @@ export const getUser = username => {
 		});
 
 		await axios
-			.get(`${_GIT_URL}${username}`)
+			.get(`${_GIT_USER_URL}${username}`)
 			.then(response => {
 				dispatch({
 					type: GET_USER_SUCCESS,
@@ -29,29 +27,6 @@ export const getUser = username => {
 				dispatch({
 					type: GET_USER_FAILURE,
 					userError: error
-				});
-			});
-	};
-};
-
-export const getRepos = username => {
-	return async dispatch => {
-		dispatch({
-			type: GET_USER_REPOS_REQUEST
-		});
-
-		await axios
-			.get(`${_GIT_URL}${username}/repos`)
-			.then(response => {
-				dispatch({
-					type: GET_USER_REPOS_SUCCESS,
-					repos: response
-				});
-			})
-			.catch(error => {
-				dispatch({
-					type: GET_USER_REPOS_FAILURE,
-					reposError: error
 				});
 			});
 	};
