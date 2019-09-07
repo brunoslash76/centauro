@@ -61,7 +61,7 @@ export const resetUser = () => {
 	return dispatch => {
 		dispatch({
 			type: RESET_USER,
-			user: {}
+			user: null,
 		});
 	};
 };

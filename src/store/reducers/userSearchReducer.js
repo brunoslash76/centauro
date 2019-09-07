@@ -8,8 +8,8 @@ import {
 } from '../actions/actionTypes';
 
 const USER_INIT_STATE = {
-	user: {},
-	repos: {},
+	user: null,
+	repos: null,
 	userError: null,
 	reposError: null,
 };

@@ -5,6 +5,14 @@ import UserRepos from '../userRepos/UserRepos';
 
 import * as actions from '../../store/actions/actionsIndex';
 
+import {
+	Header,
+	Button,
+	Input,
+	LoadingIcon,
+	InputSearchCOntainer
+} from './UserSearch.styles';
+
 class UserSearch extends Component {
 	constructor(props) {
 		super(props);
@@ -41,15 +49,23 @@ class UserSearch extends Component {
 	}
 
 	render() {
+		console.log(this.props.repos);
 		return (
 			<Fragment>
-				<div>
-					{this.props.isLoading ? 'Loading' : ''}
-					<input type='text' onChange={this.handleInput} />
-					<button onClick={this.handleUserSearch}>Pesquisar</button>
-				</div>
+				<Header>
+					<InputSearchCOntainer>
+						{this.props.isLoading ? <LoadingIcon /> : null}
+						<Input type='text' onChange={this.handleInput} />
+					</InputSearchCOntainer>
+					<Button onClick={this.handleUserSearch}>Pesquisar</Button>
+				</Header>
 				<UserDetails />
-				<UserRepos />
+				{this.props.repos
+					? this.props.repos.data.map(repo => (
+							<UserRepos key={repo.id} repo={repo} />
+					  ))
+					: null
+				}
 			</Fragment>
 		);
 	}

@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import UserSearch from '../../components/userSearch/UserSearch';
-
+import {Main} from './Home.styles';
 export default class Home extends Component {
 
     render() {
         return (
-            <div>
-            <UserSearch />
-                Home
-            </div>
+            <Main>
+                <UserSearch />
+            </Main>
         );
     }
 }

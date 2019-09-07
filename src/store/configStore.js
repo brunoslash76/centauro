@@ -5,6 +5,7 @@ import thunk from "redux-thunk";
 
 import userSearchReducer from './reducers/userSearchReducer';
 import loadingReducer from './reducers/loadingReducer';
+import reposReducer from './reducers/reposReducer';
 
 export default function configureStore(history, initialState) {
   const reducers = {
