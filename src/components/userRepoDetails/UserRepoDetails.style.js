@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import folder from './folder.png';
+import folder from './img/folder.png';
 
 export const Section = styled.section`
     display: flex;
@@ -8,6 +8,7 @@ export const Section = styled.section`
     width: 90%;
     margin: 20px auto;
     padding: 20px;
+    max-width: 1024px;
 `;
 
 export const Icon = styled.div`
@@ -18,4 +19,8 @@ export const Icon = styled.div`
     height: 20px;
     width: 20px;
     margin-right: 20px;
+`;
+
+export const Div = styled.div`
+    display: flex;
 `;
