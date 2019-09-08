@@ -1,8 +1,15 @@
 export {
     getUser,
-    getRepos,
     resetUser,
 } from './userSearchActions';
+
+export {
+    getRepos,
+    resetRepos,
+    getRepo,
+    resetRepo,
+    setSortedRepos,
+} from './reposActions';
 
 export {
     setLoading,
