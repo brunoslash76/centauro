@@ -10,6 +10,7 @@ import reposReducer from './reducers/reposReducer';
 export default function configureStore(history, initialState) {
   const reducers = {
     userSearchReducer,
+    reposReducer,
     loadingReducer,
   };
 

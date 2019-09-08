@@ -7,7 +7,7 @@ import {
 	RESET_USER
 } from './actionTypes';
 
-import { _GIT_URL as _GIT_USER_URL } from '../../utils/baseURL';
+import { _GIT_USER_URL } from '../../utils/baseURL';
 
 export const getUser = username => {
 	return async dispatch => {

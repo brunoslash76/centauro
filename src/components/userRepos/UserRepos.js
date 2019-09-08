@@ -1,6 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
+
+import * as actions from '../../store/actions/actionsIndex';
+
+import { RepoContainer, Icon, Div } from './UserRepos.styles';
 
 
 class UserRepos extends Component {
@@ -8,7 +12,8 @@ class UserRepos extends Component {
 		super(props);
 		this.state = {
 			shouldRedirect: false,
-			repoFullName: null
+			repoFullName: null,
+			reload: false,
 		};
 	}
 
@@ -20,17 +25,44 @@ class UserRepos extends Component {
 	}
 
 	render() {
-        console.log(this.props)
-		if (this.state.shouldRedirect) {
-			return <Redirect to={this.state.repoFullName} />;
+		if (!this.props.repos) {
+			return <Fragment />;
 		}
 
-        return (
-            <Link to={`repo_detail/${this.props.repo.full_name}`}>
-                <span>{this.props.repo.name}</span>
-            </Link>
-        );
+		if (this.state.shouldRedirect) {
+			return <Redirect to={`repo_detail/${this.props.repo.id}`}/>
+		}
+
+		return (
+			<RepoContainer id={this.props.repo.id}>
+				<Div onClick={ () => this.handleRepoClick(this.props.repo.full_name)}>
+					<Icon />
+					<div to={`repo_detail/${this.props.repo.id}`}>
+						<span>{this.props.repo.name}</span>
+					</div>
+				</Div>
+				<div>
+					Projeto iniciado em: {new Date(this.props.repo.created_at).toLocaleDateString()}
+				</div>
+			</RepoContainer>
+		);
 	}
 }
 
-export default connect()(UserRepos);
+const mapStateToProps = state => {
+	return {
+		user: state.userSearchReducer.user,
+		repos: state.reposReducer.repos
+	};
+};
+
+const mapDispatchToProps = dispatch => {
+	return {
+		getRepos: username => dispatch(actions.getRepos(username))
+	};
+};
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(UserRepos);

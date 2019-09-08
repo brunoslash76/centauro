@@ -39,12 +39,8 @@ const reducer = (state = USER_INIT_STATE, action) => {
 	switch (action.type) {
 		case GET_USER_FAILURE:
 			return setUserError(state, action);
-		case GET_USER_REPOS_FAILURE:
-			return setReposError(state, action);
 		case GET_USER_SUCCESS:
 			return setUser(state, action);
-		case GET_USER_REPOS_SUCCESS:
-			return setRepos(state, action);
 		case RESET_USER:
 			return resetUser(state, action);
 		default:
