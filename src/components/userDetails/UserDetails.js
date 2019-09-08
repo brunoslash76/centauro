@@ -24,7 +24,6 @@ class UserDetails extends Component {
 	}
 
 	componentDidMount() {
-		console.log(this.props);
 		this.setState({
 			...this.state,
 			userRepos: this.props.userRepos
@@ -32,7 +31,6 @@ class UserDetails extends Component {
 	}
 
 	handleSortClick(ascOrDesc) {
-		console.log(this.props);
 		this.sortRepos(ascOrDesc);
 		this.setState({
 			...this.state,
