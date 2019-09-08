@@ -1,18 +1,29 @@
 import React, { Component } from 'react';
-// import { Link } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import { Section, Icon } from './UserRepoDetails.style';
 
 class UserRepoDetails extends Component {
-
-    componentDidMount() {
-        const {match: {params}} = this.props;
-        console.log(params);
-    }
-
-    render () {
-        return(
-            <div>Worked</div>
-        )
-    }
+	render() {
+        const { repo } = this.props;
+        if (!repo) {
+            return <Redirect to='/' />;
+        }
+		return (
+			<Section>
+				<Icon />
+				<div>{repo.name}</div>
+				<NavLink to='/'>Voltar</NavLink>
+			</Section>
+		);
+	}
 }
 
-export default UserRepoDetails;
+const mapStateToProps = state => {
+	return {
+		repo: state.reposReducer.repo
+	};
+};
+
+export default connect(mapStateToProps)(UserRepoDetails);

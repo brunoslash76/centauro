@@ -1,27 +1,24 @@
 import React, { Component } from 'react';
-import { Switch, Route, withRouter, Redirect } from 'react-router-dom';
-import UserSearch from './components/userSearch/UserSearch';
+import { Switch, Route, withRouter } from 'react-router-dom';
 import Home from './layout/Home/Home';
 import './index.css';
-import UserReposDetails from './components/userRepos/UserRepos';
+import UserRepoDetails from './components/userRepoDetails/UserRepoDetails';
 
 class App extends Component {
 	render() {
 		return (
 			<Switch>
-				<Home>
-					<Redirect push from='/' exact to='/user_search' />
-					<Route
-						path='/user_search'
-						name='UserSearch'
-						component={UserSearch}
+					<Route 
+						path='/'
+						exact
+						name='Home'
+						component={Home}
 					/>
 					<Route
 						path='/repo_detail/:id'
 						name='UserReposDetails'
-						component={UserReposDetails}
+						component={UserRepoDetails}
 					/>
-				</Home>
 			</Switch>
 		);
 	}

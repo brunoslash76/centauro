@@ -17,7 +17,8 @@ class UserRepos extends Component {
 		};
 	}
 
-	handleRepoClick(repoFullName) {
+	async handleRepoClick(repoFullName) {
+		await this.props.setRepo(repoFullName);
 		this.setState({
 			shouldRedirect: true,
 			repoFullName
@@ -30,16 +31,16 @@ class UserRepos extends Component {
 		}
 
 		if (this.state.shouldRedirect) {
-			return <Redirect to={`repo_detail/${this.props.repo.id}`}/>
+			return <Redirect to={`repo_detail/${this.props.repo.id}`} />
 		}
 
 		return (
-			<RepoContainer id={this.props.repo.id}>
-				<Div onClick={ () => this.handleRepoClick(this.props.repo.full_name)}>
+			<RepoContainer>
+				<Div onClick={() => this.handleRepoClick(this.props.repo.full_name)}>
 					<Icon />
-					<div to={`repo_detail/${this.props.repo.id}`}>
+					<Div >
 						<span>{this.props.repo.name}</span>
-					</div>
+					</Div>
 				</Div>
 				<div>
 					Projeto iniciado em: {new Date(this.props.repo.created_at).toLocaleDateString()}
@@ -58,7 +59,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		getRepos: username => dispatch(actions.getRepos(username))
+		getRepos: username => dispatch(actions.getRepos(username)),
+		setRepo: repoFullName => dispatch(actions.getRepo(repoFullName))
 	};
 };
 
