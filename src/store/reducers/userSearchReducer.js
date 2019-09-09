@@ -4,7 +4,7 @@ import {
 	RESET_USER
 } from '../actions/actionTypes';
 
-const USER_INIT_STATE = {
+export const USER_INIT_STATE = {
 	user: null,
 	repos: null,
 	userError: null,
