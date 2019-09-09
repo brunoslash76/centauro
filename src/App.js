@@ -1,24 +1,27 @@
-import React, { Component, Fragment } from 'react';
-import { Switch, Route, withRouter, Redirect } from 'react-router';
-import UserSearch from './components/user-search/UserSearch';
+import React, { Component } from 'react';
+import { Switch, Route, withRouter } from 'react-router-dom';
 import Home from './layout/Home/Home';
+import './index.css';
+import UserRepoDetails from './components/userRepoDetails/UserRepoDetails';
 
 class App extends Component {
 	render() {
 		return (
-			<Fragment>
-				<Switch>
-					<Home>
-						<Route
-							path='/user_search'
-							name='user_search'
-							component={UserSearch}
-						/>
-					</Home>
-				</Switch>
-			</Fragment>
+			<Switch>
+					<Route 
+						path='/'
+						exact
+						name='Home'
+						component={Home}
+					/>
+					<Route
+						path='/repo_detail/:id'
+						name='UserReposDetails'
+						component={UserRepoDetails}
+					/>
+			</Switch>
 		);
 	}
 }
 
-export default App;
+export default withRouter(App);

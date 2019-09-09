@@ -1,0 +1,27 @@
+
+// USER 
+export const GET_USER_REQUEST = 'GET_USER_REQUEST';
+export const GET_USER_SUCCESS = 'GET_USER_SUCCESS';
+export const GET_USER_FAILURE = 'GET_USER_FAILURE';
+
+export const RESET_USER = 'RESET_USER';
+
+// REPOS
+export const GET_REPOS_REQUEST = 'GET_REPOS_REQUEST';
+export const GET_REPOS_SUCCESS = 'GET_REPOS_SUCCESS';
+export const GET_REPOS_FAILURE = 'GET_REPOS_FAILURE';
+
+export const SET_SORTED_REPOS = 'SET_SORTED_REPOS';
+
+export const RESET_REPOS = 'RESET_REPOS';
+
+// REPO
+export const GET_REPO_REQUEST = 'GET_REPO_REQUEST';
+export const GET_REPO_SUCCESS = 'GET_REPO_SUCCESS';
+export const GET_REPO_FAILURE = 'GET_REPO_FAILURE';
+
+export const RESET_REPO = 'RESET_REPO';
+
+// LOADING
+export const LOADING_TRUE = 'LOADING_TRUE';
+export const LOADING_FALSE = 'LOADING_FALSE';

@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 
-export default class Home extends Component {
-    constructor(props) {
-        super(props)
-    }
+import UserSearch from '../../components/userSearch/UserSearch';
+import { Main } from './Home.styles';
+import UserDetails from '../../components/userDetails/UserDetails';
 
-    render() {
-        return (
-            <div>
-                Home
-            </div>
-        );
-    }
+export default class Home extends Component {
+	render() {
+		return (
+			<Main>
+				<UserSearch />
+				<UserDetails />
+			</Main>
+		);
+	}
 }
