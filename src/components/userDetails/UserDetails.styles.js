@@ -21,6 +21,7 @@ export const LoadingIcon = styled.div`
 `;
 
 export const Button = styled.button`
+	background-color: trasnparent;
 	font-weight: 800;
 	color: white;
 	outline: transparent;
