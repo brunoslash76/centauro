@@ -7,6 +7,7 @@ export const StarCountContainer = styled.div`
 	border: 1px solid rgba(0, 0, 0, 0.3);
 	border-radius: 5px;
 	align-items: center;
+	width: 92px;
 `;
 
 export const StarContainer = styled.div`

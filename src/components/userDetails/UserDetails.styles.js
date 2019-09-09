@@ -66,6 +66,7 @@ export const StaredProject = styled.div`
 	padding: 20px;
 	display: flex;
 	margin: 0 20px;
+	cursor: pointer;
 `;
 
 export const FolderIcon = styled.div`
