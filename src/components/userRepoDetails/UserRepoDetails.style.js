@@ -18,6 +18,7 @@ export const Icon = styled.div`
     background-size: contain;
     height: 20px;
     width: 20px;
+    padding-right: 20px;
     margin-right: 20px;
 `;
 
