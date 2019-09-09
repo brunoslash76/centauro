@@ -8,12 +8,10 @@ import {
 	RepoContainer,
 	Icon,
 	Div,
-	EmptyStar,
-	Star,
-	StarCountContainer,
-	StarContainer,
-	CountContainer
+	
+	
 } from './UserRepos.styles';
+import RepoStar from '../repoStars/RepoStars';
 
 class UserRepos extends Component {
 	constructor(props) {
@@ -33,15 +31,6 @@ class UserRepos extends Component {
 		});
 	}
 
-	placeStars(starCount) {
-		let stars = [];
-		while (starCount > 0) {
-			stars.push(<Star key={starCount} />);
-			starCount--;
-		}
-		return stars;
-	}
-
 	render() {
 		if (!this.props.repos) {
 			return <Fragment />;
@@ -59,16 +48,8 @@ class UserRepos extends Component {
 						<span>{this.props.repo.name}</span>
 					</Div>
 				</Div>
-				<div>
-					<StarCountContainer>
-						<StarContainer>
-							{this.props.repo.stargazers_count > 0 ? <Star /> : <EmptyStar />}
-						</StarContainer>
-						<CountContainer>
-							{this.props.repo.stargazers_count}
-						</CountContainer>
-					</StarCountContainer>
-				</div>
+				<RepoStar stargazers_count={this.props.repo.stargazers_count}/>
+				
 			</RepoContainer>
 		);
 	}
