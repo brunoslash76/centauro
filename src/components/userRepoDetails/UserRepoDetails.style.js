@@ -38,5 +38,5 @@ export const Div = styled.div`
 export const Anchor = styled.div`
     align-self: flex-end;
     background-color: orange;
-    padding: 10px;
+    padding: 11px;
 `;
