@@ -7,6 +7,7 @@ import {
 
 const REPOS_INIT_STATE = {
     repos: null,
+    popRepos: null,
     repo: null,
     reposError: null,
     repoError: null,
@@ -22,7 +23,8 @@ const setReposError = (state, action) => {
 const setRepos = (state, action) => {
 	return {
 		...state,
-		repos: action.repos
+        repos: action.repos,
+        popRepos: action.popRepos,
 	};
 };
 

@@ -20,7 +20,7 @@ export const getUser = username => {
 			.then(response => {
 				dispatch({
 					type: GET_USER_SUCCESS,
-					user: response
+					user: response.data
 				});
 			})
 			.catch(error => {

@@ -4,8 +4,16 @@ import { Redirect } from 'react-router-dom';
 
 import * as actions from '../../store/actions/actionsIndex';
 
-import { RepoContainer, Icon, Div } from './UserRepos.styles';
-
+import {
+	RepoContainer,
+	Icon,
+	Div,
+	EmptyStar,
+	Star,
+	StarCountContainer,
+	StarContainer,
+	CountContainer
+} from './UserRepos.styles';
 
 class UserRepos extends Component {
 	constructor(props) {
@@ -13,7 +21,7 @@ class UserRepos extends Component {
 		this.state = {
 			shouldRedirect: false,
 			repoFullName: null,
-			reload: false,
+			reload: false
 		};
 	}
 
@@ -25,25 +33,41 @@ class UserRepos extends Component {
 		});
 	}
 
+	placeStars(starCount) {
+		let stars = [];
+		while (starCount > 0) {
+			stars.push(<Star key={starCount} />);
+			starCount--;
+		}
+		return stars;
+	}
+
 	render() {
 		if (!this.props.repos) {
 			return <Fragment />;
 		}
 
 		if (this.state.shouldRedirect) {
-			return <Redirect to={`repo_detail/${this.props.repo.id}`} />
+			return <Redirect to={`repo_detail/${this.props.repo.id}`} />;
 		}
 
 		return (
 			<RepoContainer>
-				<Div onClick={() => this.handleRepoClick(this.props.repo.full_name)}>
+				<Div onClick={() =>this.handleRepoClick(this.props.repo.full_name)}>
 					<Icon />
-					<Div >
+					<Div>
 						<span>{this.props.repo.name}</span>
 					</Div>
 				</Div>
 				<div>
-					Projeto iniciado em: {new Date(this.props.repo.created_at).toLocaleDateString()}
+					<StarCountContainer>
+						<StarContainer>
+							{this.props.repo.stargazers_count > 0 ? <Star /> : <EmptyStar />}
+						</StarContainer>
+						<CountContainer>
+							{this.props.repo.stargazers_count}
+						</CountContainer>
+					</StarCountContainer>
 				</div>
 			</RepoContainer>
 		);
@@ -60,7 +84,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
 	return {
 		getRepos: username => dispatch(actions.getRepos(username)),
-		setRepo: repoFullName => dispatch(actions.getRepo(repoFullName))
+		setRepo: repoFullName => dispatch(actions.getRepo(repoFullName)),
 	};
 };
 

@@ -1,14 +1,20 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import * as actions from '../../store/actions/actionsIndex';
 
+import UserInfo from '../userInfo/UserInfo';
+
 import {
-	Section,
-	UserInfo,
 	UserReposContainer,
 	LoadingIcon,
-	Button
+	ArrowUp,
+	ArrowDown,
+	Button,
+	StaredRepos,
+	StaredProject,
+	FolderIcon
 } from './UserDetails.styles';
 import UserRepos from '../userRepos/UserRepos';
 
@@ -17,104 +23,70 @@ class UserDetails extends Component {
 		super(props);
 
 		this.state = {
-			userRepos: null,
-			ascOrDesc: ''
+			isSorted: false,
+			asc: false,
+			starredProjects: [],
+			navSelectedRepo: null,
+			shouldRedirect: false
 		};
-		this.handleSortClick = this.handleSortClick.bind(this);
+		this.handleSortRepos = this.handleSortRepos.bind(this);
 	}
 
-	componentDidMount() {
+	handleSortRepos() {
+		this.sortRepos();
+	}
+
+	async handleNavClick(repo) {
+		await this.props.setRepo(repo.full_name);
 		this.setState({
 			...this.state,
-			userRepos: this.props.userRepos
+			shouldRedirect: true,
+			navSelectedRepo: repo
 		});
 	}
 
-	handleSortClick(ascOrDesc) {
-		this.sortRepos(ascOrDesc);
-		this.setState({
-			...this.state,
-			ascOrDesc
+	sortRepos() {
+		const sorted = this.props.userRepos.sort((a, b) => {
+			if (this.state.asc) return b.stargazers_count - a.stargazers_count;
+			else if (!this.state.asc)
+				return a.stargazers_count - b.stargazers_count;
 		});
-	}
-
-	sortRepos(ascOrDesc) {
-		let sorted;
-		if (ascOrDesc === 'asc') {
-			sorted = this.props.userRepos.sort(
-				(a, b) =>
-					new Date(a.created_at).getTime() -
-					new Date(b.created_at).getTime()
-			);
-		} else if (ascOrDesc === 'desc') {
-			sorted = this.props.userRepos.sort(
-				(a, b) =>
-					new Date(b.created_at).getTime() -
-					new Date(a.created_at).getTime()
-			);
-		}
 		this.props.setSortedRepos(sorted);
+		this.setState({
+			...this.state,
+			asc: !this.state.asc,
+			sSorted: true
+		});
 	}
 
 	render() {
 		if (!!this.props.userError) return <div>Usuárion não encontrado</div>;
 		if (!this.props.user) return <div>Busque um usuário</div>;
-
-		const user = this.props.user.data;
+		if (this.state.shouldRedirect)
+			return (
+				<Redirect to={`repo_detail/${this.state.navSelectedRepo.id}`} />
+			);
 		return (
 			<Fragment>
-				<UserInfo>
-					<Section>
-						<div className='user-avatar'>
-							<img
-								src={user.avatar_url}
-								alt={`${user.name} avartar`}
-								height='150px;'
-							/>
-						</div>
-						<UserInfo>
-							<section>
-								<div>
-									Nome:{' '}
-									<a
-										href={user.html_url}
-										target='_blank'
-										rel='noopener noreferrer'
-									>
-										{user.name}
-									</a>
-								</div>
-
-								<div>
-									Email:{' '}
-									{user.email
-										? user.email
-										: 'No email registered'}
-								</div>
-								<div>
-									<div>Bio:</div>
-									<div>{user.bio}</div>
-								</div>
-							</section>
-							<div>
-								<p>Followers: {user.followers}</p>
-								<p>Following: {user.following}</p>
-							</div>
-						</UserInfo>
-					</Section>
-				</UserInfo>
+				{this.props.user ? <UserInfo user={this.props.user} /> : null}
+				<StaredRepos>
+					{this.props.popRepos
+						? this.props.popRepos.map(repo => (
+								<StaredProject
+									key={repo.id}
+									onClick={() => this.handleNavClick(repo)}
+								>
+									<FolderIcon />
+									<div>{repo.name}</div>
+								</StaredProject>
+						  ))
+						: null}
+				</StaredRepos>
 				<UserReposContainer>
 					{this.props.userRepos ? (
-						<div>
-							<Button onClick={() => this.handleSortClick('asc')}>
-								Data Crescente
-							</Button>
-							<Button
-								onClick={() => this.handleSortClick('desc')}
-							>
-								Data Descrescente
-							</Button>
-						</div>
+						<Button onClick={this.handleSortRepos}>
+							{this.state.asc ? <ArrowUp /> : <ArrowDown />}
+						</Button>
 					) : null}
 					{this.props.userRepos
 						? this.props.userRepos.map(repo => {
@@ -133,6 +105,7 @@ const mapStateToProps = state => {
 		userError: state.userSearchReducer.userError,
 		user: state.userSearchReducer.user,
 		userRepos: state.reposReducer.repos,
+		popRepos: state.reposReducer.popRepos,
 		isLoading: state.loadingReducer.loading
 	};
 };
@@ -140,7 +113,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
 	return {
 		resetUser: () => dispatch(actions.resetUser()),
-		setSortedRepos: repos => dispatch(actions.setSortedRepos(repos))
+		setSortedRepos: repos => dispatch(actions.setSortedRepos(repos)),
+		setRepo: repoFullName => dispatch(actions.getRepo(repoFullName))
 	};
 };
 

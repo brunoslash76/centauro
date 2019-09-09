@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import loading from './loading.gif';
+import loading from './img/loading.gif';
 
 export const Header = styled.header`
 	display: flex;
@@ -10,24 +10,34 @@ export const Header = styled.header`
 	border-radius: 10px;
 	box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.3);
 	margin-bottom: 40px;
+	flex-wrap: wrap;
 `;
 
 export const Button = styled.button`
-	height: 38px;
 	background-color: orange;
-	font-weight: 400;
-	width: 150px;
+	cursor: pointer;
 	color: white;
+	font-weight: 400;
+	height: 38px;
+	width: 100%;
 	border: none;
 	border-radius: 10px;
 	font-size: 20px;
 	outline: transparent;
-	cursor: pointer;
+	
+	@media (min-width: 768px) {
+		width: 150px;
+	}
 `;
 
 export const InputSearchCOntainer = styled.div`
 	position: relative;
-	width: 60%;
+	width: 100%;
+	margin-bottom: 40px;
+	@media (min-width: 768px) {
+		width: 60%;
+		margin: 0;
+	}
 `;
 
 export const Input = styled.input`
@@ -36,10 +46,13 @@ export const Input = styled.input`
 	border-radius: 20px;
 	box-shadow: 0px 2px 2px 1.5px rgba(0, 0, 0, 0.2);
 	width: 100%;
-	height: 100%;
+	height: 38px;
 	margin-right: 10px;
 	padding-left: 20px;
 	font-size: 20px;
+	@media (min-width: 768px) {
+		margin: 0;
+	}
 `;
 
 export const LoadingIcon = styled.div`
