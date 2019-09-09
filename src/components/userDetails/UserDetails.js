@@ -4,9 +4,9 @@ import { Redirect } from 'react-router-dom';
 
 import * as actions from '../../store/actions/actionsIndex';
 
+import UserInfo from '../userInfo/UserInfo';
+
 import {
-	Section,
-	UserInfo,
 	UserReposContainer,
 	LoadingIcon,
 	ArrowUp,
@@ -14,9 +14,7 @@ import {
 	Button,
 	StaredRepos,
 	StaredProject,
-	FolderIcon,
-	UserImg,
-	InfoDiv
+	FolderIcon
 } from './UserDetails.styles';
 import UserRepos from '../userRepos/UserRepos';
 
@@ -68,49 +66,9 @@ class UserDetails extends Component {
 			return (
 				<Redirect to={`repo_detail/${this.state.navSelectedRepo.id}`} />
 			);
-		const { user } = this.props;
 		return (
 			<Fragment>
-				<UserInfo>
-					<Section>
-						<UserImg>
-							<img
-								src={user.avatar_url}
-								alt={`${user.name} avartar`}
-								height='150px;'
-							/>
-						</UserImg>
-						<UserInfo>
-							<section>
-								<InfoDiv>
-									<strong>Nome: </strong>
-									<a
-										href={user.html_url}
-										target='_blank'
-										rel='noopener noreferrer'
-									>
-										{user.name}
-									</a>
-								</InfoDiv>
-
-								<InfoDiv>
-									<strong>Email: </strong>
-									{user.email
-										? user.email
-										: 'No email registered'}
-								</InfoDiv>
-								<InfoDiv>
-									<strong>Bio:</strong>
-									<div>{user.bio}</div>
-								</InfoDiv>
-							</section>
-							<div>
-								<p>Followers: {user.followers}</p>
-								<p>Following: {user.following}</p>
-							</div>
-						</UserInfo>
-					</Section>
-				</UserInfo>
+				{this.props.user ? <UserInfo user={this.props.user} /> : null}
 				<StaredRepos>
 					{this.props.popRepos
 						? this.props.popRepos.map(repo => (
